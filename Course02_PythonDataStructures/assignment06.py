@@ -6,7 +6,6 @@
 # extract the number at the end of the line below. Convert the extracted value
 # to a floating point number and print it out.
 
-
 text = "X-DSPAM-Confidence:    0.8475";
 index = text.find('0.8475')
 print(float(text[index:index + 6]))
