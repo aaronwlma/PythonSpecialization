@@ -1,6 +1,6 @@
 # Assignment 08a - Chapter 8
 # For University of Michigan's Coursera Specialization "Python for Everybody"
-# Course 1 - Programming for Everybody (Getting Started with Python)
+# Course 2 - Python Data Structures
 
 # Problem: 8.4 Open the file romeo.txt and read it line by line. For each line,
 # split the line into a list of words using the split() method. The program
