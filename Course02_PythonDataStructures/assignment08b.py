@@ -1,6 +1,6 @@
 # Assignment 08b - Chapter 8
 # For University of Michigan's Coursera Specialization "Python for Everybody"
-# Course 1 - Programming for Everybody (Getting Started with Python)
+# Course 2 - Python Data Structures
 
 # Problem: 8.5 Open the file mbox-short.txt and read it line by line. When you
 # find a line that starts with 'From ' like the following line:
