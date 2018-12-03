@@ -1,6 +1,6 @@
 # Assignment 09a - Chapter 9
 # For University of Michigan's Coursera Specialization "Python for Everybody"
-# Course 1 - Programming for Everybody (Getting Started with Python)
+# Course 2 - Python Data Structures
 
 # Problem: 9.4 Write a program to read through the mbox-short.txt and figure out
 # who has the sent the greatest number of mail messages. The program looks for
