@@ -4,54 +4,74 @@
 
 # Problem:
 
-# Exploring the HyperText Transport Protocol
+# Finding Numbers in a Haystack
+# In this assignment you will read through and parse a file with text and
+# numbers. You will extract all the numbers in the file and compute the sum of
+# the numbers.
 
-# You are to retrieve the following document using the HTTP protocol in a way
-# that you can examine the HTTP Response headers.
+# Data Files
+# We provide two files for this assignment. One is a sample file where we give
+# you the sum for your testing and the other is the actual data you need to
+# process for the assignment.
 
-# http://data.pr4e.org/intro-short.txt
+# Sample data: http://py4e-data.dr-chuck.net/regex_sum_42.txt
+# (There are 90 values with a sum=445833)
 
-# There are three ways that you might retrieve this web page and look at the
-# response headers:
+# Actual data: http://py4e-data.dr-chuck.net/regex_sum_160220.txt
+# (There are 86 values and the sum ends with 547)
 
-# Preferred: Modify the socket1.py program to retrieve the above URL and print
-# out the headers and data. Make sure to change the code to retrieve the above
-# URL - the values are different for each URL.
+# These links open in a new window. Make sure to save the file into the same
+# folder as you will be writing your Python program.
+# Note: Each student will have a distinct data file for the assignment - so only
+# use your own data file for analysis.
 
-# Open the URL in a web browser with a developer console or FireBug and
-# manually examine the headers that are returned.
+# Data Format
+# The file contains much of the text from the introduction of the textbook
+# except that random numbers are inserted throughout the text. Here is a sample
+# of the output you might see:
 
-# Use the telnet program as shown in lecture to retrieve the headers and
-# content.
+# Why should you learn to write programs? 7746
+# 12 1929 8827
+# Writing programs (or programming) is a very creative
+# 7 and rewarding activity.  You can write programs for
+# many reasons, ranging from making your living to solving
+# 8837 a difficult data analysis problem to having fun to helping 128
+# someone else solve a problem.  This book assumes that
+# everyone needs to know how to program ...
 
-# Enter the header values in each of the fields below and press "Submit".
+# The sum for the sample text above is 27486. The numbers can appear anywhere in
+# the line. There can be any number of numbers in each line (including none).
+
+# Handling The Data
+# The basic outline of this problem is to read the file, look for integers using
+# the re.findall(), looking for a regular expression of '[0-9]+' and then
+# converting the extracted strings to integers and summing up the integers.
 
 # Import relevant libraries
-import socket
+import re
 
-# Open a socket and retrieve desired web URL
-# Initialize a socket that opens to the Internet
-mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# Connect to the host on port 80
-mySocket.connect(('data.pr4e.org', 80))
-# Command GET URL using HTTP 1.0 and then hit enter twice, then convert from
-# unicode to UTF-9 text format
-cmd = 'GET http://data.pr4e.org/intro-short.txt HTTP/1.0\r\n\r\n'.encode()
-# Send predefined command
-mySocket.send(cmd)
+# Read input file
+inputFile = input("Enter file name: ")
+if (len(inputFile) < 1):
+    inputFile = "regex_sum_160220.txt"
+fileHandle = open(inputFile)
 
-# Receive web server data and interpret
-while True:
-    data = mySocket.recv(512)
-    if len(data) < 1:
-        break
-    print(data.decode(), end='')
+# Initiate relevant variables
+runningTotal = 0
+count = 0
 
-# Once all data is received, close socket
-mySocket.close()
+# Iterate through each line and parse for numbers to tally up
+for line in fileHandle:
+    # Regex to find only numeric values in line
+    numbers = re.findall('[0-9]+', line)
+    # Convert to float for calculations
+    floatNumbersList = [float(i) for i in numbers]
+    count = count + len(floatNumbersList)
+    runningTotal = runningTotal + sum(floatNumbersList)
 
-# Telnet command to get the same information
-# telnet HOST PORT
-# telnet data.pr4e.org 80
-# COMMAND URL PROTOCOL
-# GET http://data.pr4e.org/intro-short.txt HTTP/1.0
+# Print desired output
+print("There are", count, "values with a sum =", int(runningTotal))
+
+# Compact Version
+# import re
+# print(sum([float(i) for i in re.findall('[0-9]+', open("regex_sum_42.txt").read())]))
